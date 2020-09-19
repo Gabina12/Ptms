@@ -1,9 +1,40 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{70C6155E-0979-4438-84C7-E0AF21BD345A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRendering", "TestRendering\TestRendering.csproj", "{5942FFE9-CB13-4575-B0E5-0E930C6FA10F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPCM.Core", "TPCM.Core.Models\TPCM.Core.csproj", "{DD25722E-4B67-4EFE-9009-410A9528C2DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPCM.Infrastructure", "TPCM.Infrastructure\TPCM.Infrastructure.csproj", "{B1A6DC27-CFA0-4DE1-8723-AA57A9164AAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPCM.API", "TPCM.API\TPCM.API.csproj", "{F8A83E49-8B26-44C7-895A-388ED4F54267}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5942FFE9-CB13-4575-B0E5-0E930C6FA10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5942FFE9-CB13-4575-B0E5-0E930C6FA10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5942FFE9-CB13-4575-B0E5-0E930C6FA10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5942FFE9-CB13-4575-B0E5-0E930C6FA10F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD25722E-4B67-4EFE-9009-410A9528C2DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD25722E-4B67-4EFE-9009-410A9528C2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD25722E-4B67-4EFE-9009-410A9528C2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD25722E-4B67-4EFE-9009-410A9528C2DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1A6DC27-CFA0-4DE1-8723-AA57A9164AAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1A6DC27-CFA0-4DE1-8723-AA57A9164AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1A6DC27-CFA0-4DE1-8723-AA57A9164AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A6DC27-CFA0-4DE1-8723-AA57A9164AAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8A83E49-8B26-44C7-895A-388ED4F54267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8A83E49-8B26-44C7-895A-388ED4F54267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8A83E49-8B26-44C7-895A-388ED4F54267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8A83E49-8B26-44C7-895A-388ED4F54267}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5942FFE9-CB13-4575-B0E5-0E930C6FA10F} = {70C6155E-0979-4438-84C7-E0AF21BD345A}
 	EndGlobalSection
 EndGlobal

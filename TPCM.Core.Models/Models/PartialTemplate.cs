@@ -1,27 +1,38 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using System;
+using System.Text.Json.Serialization;
 
 namespace TPCM.Core.Models
 {
-	public class PartialTemplate : IEntity<Guid>, ITemplateInfo, IUserInfo
+	public class PartialTemplate : IEntity<string>, ITemplateInfo, IUserInfo
 	{
-		public Guid Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.String)]
+        public string Id { get; set; }
 
-		public string Name { get; set; }
+        [JsonPropertyName("_rev")]
+        [JsonProperty("_rev")]
+        public string Rev { get; }
+
+        public string Name { get; set; }
 
 		public string Description { get; set; }
 
-		public string Category { get; set; }
+		public string TemplateBody { get; set; }
 
-		public string Body { get; set; }
+        public long Created { get; set; }
 
-		public string Header { get; set; }
+        public string Creator { get; set; }
 
-		public string Footer { get; set; }
+        public long Updated { get; set; }
+        public string Editor { get; set; }
 
-		public DateTime Created { get; set; }
+        [JsonPropertyName("category")]
+        [JsonProperty("category")]
+        public string Category { get; set; }
 
-		public string CreatedBy { get; set; }
-
-		public DateTime? Modifed { get; set; }
-	}
+        public string Version { get; set; }
+    }
 }

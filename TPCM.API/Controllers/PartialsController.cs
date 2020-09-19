@@ -1,49 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using TPCM.Core.Models;
 using TPCM.Core.Services.Interfaces;
-using TPCM.Infrastructure;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace TPCM.API.Controllers {
 
-namespace TPCM.API.Controllers
-{
 	[Authorize]
-	[Route("api/templates")]
+	[Route("api/partials")]
 	[ApiController]
 
-	public class TemplateController : ControllerBase
-	{
+	public class PartialsController : ControllerBase {
 		// GET: /<controller>/
-		private readonly ITemplateService _templateService;
+		private readonly IPartialsService _templateService;
 
-		public TemplateController(ITemplateService templateService)
-		{
+		public PartialsController(IPartialsService templateService) {
 			_templateService = templateService ?? throw new ArgumentNullException(nameof(templateService));
 		}
 
 		[HttpGet]
-		public async Task<IResponse<IEnumerable<Template>>> GetAsync() => await _templateService.Get();
+		public async Task<IResponse<IEnumerable<PartialTemplate>>> GetAsync() => await _templateService.Get();
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<IResponse<Template>>> GetAsync(string id)
-		{
+		public async Task<ActionResult<IResponse<PartialTemplate>>> GetAsync(string id) {
 			var template = await _templateService.Get(id);
 
 			if (template == null) {
 				return NotFound();
 			}
 
-			return new Response<Template>(template);
+			return new Response<PartialTemplate>(template);
 		}
 
 		[HttpPut]
-		public async Task<ActionResult<Template>> CreateAsync(Template template) {
+		public async Task<ActionResult<PartialTemplate>> CreateAsync(PartialTemplate template) {
 			template.Creator = User.Identity.Name;
 			var created = await _templateService.Create(template);
 
@@ -51,17 +43,16 @@ namespace TPCM.API.Controllers
 		}
 
 		[HttpPost("{id}")]
-		public async Task<IActionResult> UpdateAsync(string id, Template templateIn)
-		{
+		public async Task<IActionResult> UpdateAsync(string id, PartialTemplate templateIn) {
 			templateIn.Editor = User.Identity.Name;
+			
 			await _templateService.Update(id, templateIn);
 
 			return NoContent();
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteAsync(string id)
-		{
+		public async Task<IActionResult> DeleteAsync(string id) {
 			await _templateService.Delete(id);
 
 			return NoContent();

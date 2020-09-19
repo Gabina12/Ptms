@@ -1,9 +1,24 @@
-﻿namespace TPCM.Core.Models
+﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
+namespace TPCM.Core.Models
 {
 	public interface ITemplateInfo
 	{
-		string Body { get; }
-		string Header { get; }
-		string Footer { get; }
+		[JsonPropertyName("name")]
+		[JsonProperty("name")]
+		string Name { get; }
+
+		[JsonPropertyName("description")]
+		[JsonProperty("description")]
+		string Description { get; }
+
+		[JsonPropertyName("template")]
+		[JsonProperty("template")]
+		string TemplateBody { get; set; }
+
+		[JsonPropertyName("version")]
+		[JsonProperty("version")]
+		string Version { get; }
 	}
 }
