@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bondx.Extention.Redis;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +18,7 @@ using TPCM.API.Helpers;
 using TPCM.Core.Models;
 using TPCM.Core.Repositories;
 using TPCM.Core.Services.Implementations;
+using TPCM.Core.Services.Implementations.DistributedCacheImpl;
 using TPCM.Core.Services.Interfaces;
 using TPCM.Infrastructure;
 
@@ -58,13 +60,21 @@ namespace TPCM.API
 			services.AddSingleton<IPartialsService, PartialsService>();
 			services.AddScoped<IUserService, UserService>();
 			services.AddSingleton<IRenderingService, RenderingService>();
-			services.AddSingleton(typeof(IGeneralCache<>), typeof(MemoryGeneralCache<>));
-			services.AddSingleton(typeof(ICache<>), typeof(MemCache<>));
 
+            if (Configuration.GetSection("UseRedis").Get<bool>()) {
+				services.AddSingleton(typeof(IGeneralCache<>), typeof(RedisGeneralCache<>));
+				services.AddSingleton(typeof(ICache<>), typeof(RedisCache<>));
+				services.AddRedisStore(Configuration, "Redis");
+				services.AddSingleton<IRedisStore, RedisStore>();
+            }else {
+				services.AddSingleton(typeof(IGeneralCache<>), typeof(MemoryGeneralCache<>));
+				services.AddSingleton(typeof(ICache<>), typeof(MemCache<>));
+				services.AddMemoryCache();
+			}
+			
 			services.AddControllers()
 				.AddNewtonsoftJson();
 
-			services.AddMemoryCache();
 
 			services.AddSwaggerGen();
 		}

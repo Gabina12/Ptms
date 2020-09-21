@@ -64,9 +64,7 @@ namespace TPCM.Core.Services.Implementations {
 				versions[versions.Length - 1] = newVersion;
 			}
 			template.Versions = versions;
-			template.Updated = (long)DateTime.UtcNow
-			   .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
-			   .TotalMilliseconds;
+			template.Updated = DateTime.UtcNow.AsDate();
 
 			await _templates.Update(id, template);
 			if (old.Version == template.Version)

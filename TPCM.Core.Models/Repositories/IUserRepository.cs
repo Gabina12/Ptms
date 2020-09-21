@@ -7,6 +7,7 @@ namespace TPCM.Core.Repositories {
 		Task Update(string id, User template);
 		Task Delete(string id);
 		Task<User> Get(string userName, string password);
+		Task Migrate();
 
 	}
 }

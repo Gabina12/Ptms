@@ -6,9 +6,11 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TPCM.Core.Services.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TPCM.API.Controllers {
+	[Authorize]
     [Route("api/templates")]
 	public class RenderController : Controller
 	{

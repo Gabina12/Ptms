@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TPCM.Core.Extentions;
 using TPCM.Core.Models;
 using TPCM.Core.Repositories;
 using TPCM.Core.Services.Interfaces;
@@ -36,9 +37,7 @@ namespace TPCM.Core.Services.Implementations {
 		public async Task Update(string id, PartialTemplate template) {
 			var old = await _templates.Get(id);
 			if (old == null) throw new Exception("Template not found!");
-			template.Updated = (long)DateTime.UtcNow
-			   .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
-			   .TotalMilliseconds;
+			template.Updated = DateTime.UtcNow.AsDate();
 			await _templates.Update(id, template);
 			await _cache.Remove("partials",id);
 			await _cache.Appand("partials", new PartialCacheItem { Id = template.Id, Template = template.TemplateBody });
