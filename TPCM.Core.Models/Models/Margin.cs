@@ -1,10 +1,18 @@
-﻿namespace TPCM.Core.Models
-{
-	public class Margin
-	{
-		public string Top { get; set; }
-		public string Bottom { get; set; }
-		public string Right { get; set; }
-		public string Left { get; set; }
-	}
+﻿using Newtonsoft.Json;
+
+namespace TPCM.Core.Models {
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
+    public class Margin {
+        [JsonProperty("top")]
+        public string Top { get; set; }
+
+        [JsonProperty("bottom")]
+        public string Bottom { get; set; }
+
+        [JsonProperty("right")]
+        public string Right { get; set; }
+
+        [JsonProperty("left")]
+        public string Left { get; set; }
+    }
 }

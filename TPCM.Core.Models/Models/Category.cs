@@ -2,7 +2,7 @@
 
 namespace TPCM.Core.Models
 {
-	public class Category : IEntity<Guid>
+	public class Category
 	{
 		public Guid Id { get; set; }
 
