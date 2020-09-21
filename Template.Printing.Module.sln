@@ -1,15 +1,16 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30404.54
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{70C6155E-0979-4438-84C7-E0AF21BD345A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRendering", "TestRendering\TestRendering.csproj", "{5942FFE9-CB13-4575-B0E5-0E930C6FA10F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestRendering", "TestRendering\TestRendering.csproj", "{5942FFE9-CB13-4575-B0E5-0E930C6FA10F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPCM.Core", "TPCM.Core.Models\TPCM.Core.csproj", "{DD25722E-4B67-4EFE-9009-410A9528C2DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTMS.Core", "PTMS.Core\PTMS.Core.csproj", "{DD25722E-4B67-4EFE-9009-410A9528C2DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPCM.Infrastructure", "TPCM.Infrastructure\TPCM.Infrastructure.csproj", "{B1A6DC27-CFA0-4DE1-8723-AA57A9164AAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTMS.Infrastructure", "PTMS.Infrastructure\PTMS.Infrastructure.csproj", "{B1A6DC27-CFA0-4DE1-8723-AA57A9164AAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPCM.API", "TPCM.API\TPCM.API.csproj", "{F8A83E49-8B26-44C7-895A-388ED4F54267}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTMS.API", "PTMS.API\PTMS.API.csproj", "{F8A83E49-8B26-44C7-895A-388ED4F54267}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,7 +35,13 @@ Global
 		{F8A83E49-8B26-44C7-895A-388ED4F54267}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8A83E49-8B26-44C7-895A-388ED4F54267}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5942FFE9-CB13-4575-B0E5-0E930C6FA10F} = {70C6155E-0979-4438-84C7-E0AF21BD345A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC401A3B-3A14-45A0-9CAB-122021197530}
 	EndGlobalSection
 EndGlobal
