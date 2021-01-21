@@ -14,7 +14,7 @@ namespace PTMS.Core.Models
 
         [JsonPropertyName("_rev")]
         [JsonProperty("_rev")]
-        public string Rev { get; }
+        public string Rev { get; set; }
 
         public string Name { get; set; }
 

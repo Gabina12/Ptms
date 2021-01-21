@@ -9,7 +9,7 @@ namespace PTMS.Infrastructure.Postgre.Data.DbEntities
         public Guid Id { get; set; }
 
         [MaxLength(250)]
-        public string Rev { get; }
+        public string Rev { get; set; }
 
         [MaxLength(250)]
         public string Name { get; set; }
