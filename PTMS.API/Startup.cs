@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -45,11 +46,15 @@ namespace PTMS.API
 					.AllowCredentials();
 			}));
 
+			services.AddDbContext<Infrastructure.Postgre.Data.PtmsDataStore>(options =>
+			{
+				options.UseNpgsql(Configuration.GetConnectionString("ptms"), sql => sql.MigrationsAssembly(typeof(Infrastructure.Postgre.Data.PtmsDataStore).Assembly.FullName));
+			});
+
 			services.AddAuthentication("BasicAuthentication")
 				.AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
 			services.Configure<StoreDatabaseSettings>(Configuration.GetSection(nameof(StoreDatabaseSettings)));
-
 			services.AddSingleton<IStoreDatabaseSettings>(sp => sp.GetRequiredService<IOptions<StoreDatabaseSettings>>().Value);
 
 			services.AddSingleton<ICategoryRepository, CategoryRepository>();
