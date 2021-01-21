@@ -13,7 +13,7 @@ using PTMS.Infrastructure;
 
 namespace PTMS.API.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	[Route("api/templates")]
 	[ApiController]
 

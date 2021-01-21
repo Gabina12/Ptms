@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PTMS.API.Controllers {
-	[Authorize]
+	//[Authorize]
     [Route("api/templates")]
 	public class RenderController : Controller
 	{
@@ -22,7 +22,7 @@ namespace PTMS.API.Controllers {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        [HttpPost("{id}/render/txt/{version?}")]
+        [HttpPost("{id}/render/txt/{version}")]
 		public async Task<IActionResult> Render(string id, string version, [FromBody]JObject templateIn)
 		{
 			_logger.LogInformation($"start rendering for id: {id}, version: {version} - {DateTime.Now}");

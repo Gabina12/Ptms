@@ -128,6 +128,10 @@ namespace PTMS.Infrastructure.Postgre.Data.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
+                    b.Property<string>("Rev")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
+
                     b.Property<string>("TemplateBody")
                         .HasColumnType("text");
 
@@ -155,8 +159,8 @@ namespace PTMS.Infrastructure.Postgre.Data.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("text");
 
-                    b.Property<long>("Created")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Creator")
                         .HasColumnType("text");
@@ -176,11 +180,14 @@ namespace PTMS.Infrastructure.Postgre.Data.Migrations
                     b.Property<Guid>("OptionId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Rev")
+                        .HasColumnType("text");
+
                     b.Property<string>("TemplateBody")
                         .HasColumnType("text");
 
-                    b.Property<long>("Updated")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Version")
                         .HasColumnType("text");

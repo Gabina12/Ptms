@@ -13,24 +13,24 @@ namespace PTMS.API {
 		public static async Task Main(string[] args)
 		{
 			var host = CreateHostBuilder(args).Build();
-			using (var scope = host.Services.CreateScope()) {
-				var services = scope.ServiceProvider;
-				var users = services.GetRequiredService<IUserRepository>();
-				await users.Migrate();
-				var templates = services.GetService<IGeneralCache<Template>>();
-				var templatesRepo = services.GetService<ITemplateRepository>();
-				await templates.Restore(templatesRepo);
-                var _cache = services.GetService<ICache<PartialCacheItem>>();
-                var partialsRepo = services.GetService<IPartialsRepository>();
-				var items = await partialsRepo.Get();
-                foreach (var item in items) {
-					await _cache.Appand("partials", new PartialCacheItem {
-						Id = item.Id,
-						Template = item.TemplateBody
-					});
+			//using (var scope = host.Services.CreateScope()) {
+			//	var services = scope.ServiceProvider;
+			//	var users = services.GetRequiredService<IUserRepository>();
+			//	await users.Migrate();
+			//	var templates = services.GetService<IGeneralCache<Template>>();
+			//	var templatesRepo = services.GetService<ITemplateRepository>();
+			//	await templates.Restore(templatesRepo);
+   //             var _cache = services.GetService<ICache<PartialCacheItem>>();
+   //             var partialsRepo = services.GetService<IPartialsRepository>();
+			//	var items = await partialsRepo.Get();
+   //             foreach (var item in items) {
+			//		await _cache.Appand("partials", new PartialCacheItem {
+			//			Id = item.Id,
+			//			Template = item.TemplateBody
+			//		});
 
-				}
-            }
+			//	}
+   //         }
 			host.Run();
 		}
 

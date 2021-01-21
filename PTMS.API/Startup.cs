@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PTMS.API.Controllers;
+using PTMS.API.Extensions;
 using PTMS.API.Helpers;
 using PTMS.Core.Models;
 using PTMS.Core.Repositories;
@@ -22,6 +23,7 @@ using PTMS.Core.Services.Implementations;
 using PTMS.Core.Services.Implementations.DistributedCacheImpl;
 using PTMS.Core.Services.Interfaces;
 using PTMS.Infrastructure;
+using PTMS.Infrastructure.Postgre;
 
 namespace PTMS.API
 {
@@ -46,27 +48,12 @@ namespace PTMS.API
 					.AllowCredentials();
 			}));
 
-			services.AddDbContext<Infrastructure.Postgre.Data.PtmsDataStore>(options =>
-			{
-				options.UseNpgsql(Configuration.GetConnectionString("ptms"), sql => sql.MigrationsAssembly(typeof(Infrastructure.Postgre.Data.PtmsDataStore).Assembly.FullName));
-			});
 
-			services.AddAuthentication("BasicAuthentication")
-				.AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+			services.AddPtmsModulesWithPostgre(Configuration);
+			//or use mongo
+			//services.AddPtmsModulesWithMongo(Configuration);
 
-			services.Configure<StoreDatabaseSettings>(Configuration.GetSection(nameof(StoreDatabaseSettings)));
-			services.AddSingleton<IStoreDatabaseSettings>(sp => sp.GetRequiredService<IOptions<StoreDatabaseSettings>>().Value);
-
-			services.AddSingleton<ICategoryRepository, CategoryRepository>();
-			services.AddSingleton<ITemplateRepository, TemplateRepository>();
-			services.AddSingleton<IPartialsRepository, PartialsRepository>();
-			services.AddSingleton<IUserRepository, UserRepository>();
-			services.AddSingleton<ITemplateService, TemplateService>();
-			services.AddSingleton<IPartialsService, PartialsService>();
-			services.AddScoped<IUserService, UserService>();
-			services.AddSingleton<IRenderingService, RenderingService>();
-
-            if (Configuration.GetSection("UseRedis").Get<bool>()) {
+			if (Configuration.GetSection("UseRedis").Get<bool>()) {
 				services.AddSingleton(typeof(IGeneralCache<>), typeof(RedisGeneralCache<>));
 				services.AddSingleton(typeof(ICache<>), typeof(RedisCache<>));
 				services.AddRedisStore(Configuration, "Redis");
@@ -104,8 +91,8 @@ namespace PTMS.API
 
 			app.UseRouting();
 
-			app.UseAuthentication();
-			app.UseAuthorization();
+			//app.UseAuthentication();
+			//app.UseAuthorization();
 
 			app.UseEndpoints(endpoints => {
 				endpoints.MapControllers();

@@ -8,17 +8,17 @@ namespace PTMS.Infrastructure.Postgre.Data.DbEntities
     {
         public Guid Id { get; set; }
 
-        public string Rev { get; }
+        public string Rev { get; set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
 
-        public long Created { get; set; }
+        public DateTime Created { get; set; }
 
         public string Creator { get; set; }
 
-        public long Updated { get; set; }
+        public DateTime? Updated { get; set; }
 
         public string Editor { get; set; }
 

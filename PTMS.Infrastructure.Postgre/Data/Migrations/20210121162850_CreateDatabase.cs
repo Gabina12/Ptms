@@ -46,6 +46,7 @@ namespace PTMS.Infrastructure.Postgre.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Rev = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true),
                     Name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true),
                     Description = table.Column<string>(type: "character varying(4000)", maxLength: 4000, nullable: true),
                     TemplateBody = table.Column<string>(type: "text", nullable: true),
@@ -94,11 +95,12 @@ namespace PTMS.Infrastructure.Postgre.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Rev = table.Column<string>(type: "text", nullable: true),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    Created = table.Column<long>(type: "bigint", nullable: false),
+                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Creator = table.Column<string>(type: "text", nullable: true),
-                    Updated = table.Column<long>(type: "bigint", nullable: false),
+                    Updated = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     Editor = table.Column<string>(type: "text", nullable: true),
                     TemplateBody = table.Column<string>(type: "text", nullable: true),
                     Caching = table.Column<bool>(type: "boolean", nullable: false),
