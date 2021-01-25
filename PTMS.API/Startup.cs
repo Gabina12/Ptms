@@ -76,7 +76,10 @@ namespace PTMS.API
 				app.UseDeveloperExceptionPage();
 			}
 			app.UseCors("ApiCorsPolicy");
+
+#if DEBUG
 			app.UseHttpsRedirection();
+#endif
 
 			app.UseSwagger();
 
