@@ -33,11 +33,11 @@ namespace PTMS.API.Controllers {
 		}
 
 
-		[HttpPost("{id}/render/pdf/{version?}")]
-		public async Task<IActionResult> RenderPdf(string id, string version, [FromBody] JsonElement templateIn) {
+		[HttpPost("{id}/render/pdf/{version}")]
+		public async Task<IActionResult> RenderPdf(string id, string version, [FromBody] JObject templateIn) {
 			object json = null;
-			if (templateIn.ValueKind != JsonValueKind.Undefined)
-				json = JsonConvert.DeserializeObject(templateIn.GetRawText());
+			if (templateIn != null)
+				json = JsonConvert.DeserializeObject(templateIn.ToString());
 			var file = await _render.RenderPdfAsync(id, "pdf", version, json);
 			return File(file, "application/pdf", $"{id}.pdf");
 		}

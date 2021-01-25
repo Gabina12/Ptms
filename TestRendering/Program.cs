@@ -1,44 +1,56 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PTMS.Client.SDK;
 //using Nustache.Core;
 
 namespace TestRendering
 {
 	class Program
 	{
-		static void Main(string[] args)
+		private static IServiceProvider serviceProvider;
+		private static IConfiguration configuration;
+
+		static async Task Main(string[] args)
 		{
+			var builder = new ConfigurationBuilder()
+			  .AddJsonFile($"appsettings.json", optional: false, reloadOnChange: false);
 
-			var stop = new Stopwatch();
-			stop.Start();
+			configuration = builder.Build();
+			var services = new ServiceCollection();
+			services.AddOptions();
 
-			HttpClient http = new HttpClient();
-			http.BaseAddress = new Uri("https://localhost:5001/");
-			var todoItem = new { name = $"lasha" };
-
-			Parallel.For(0, 1001, (state, a) => {
-				var todoItemJson = new StringContent(JsonSerializer.Serialize(todoItem), Encoding.UTF8, "application/json");
-
-
-				using var httpResponse =
-					 http.PostAsync("/api/templates/49ec99c45cc8ee0a0b766eb57b001cb7/render/txt", todoItemJson).Result;
-
-				httpResponse.EnsureSuccessStatusCode();
-				Console.WriteLine(httpResponse.Content.ReadAsStringAsync().Result);
+			services.AddPtmsClient(options =>
+			{
+				options.BaseAddress = new Uri("https://localhost:5001/");
 			});
 
+			serviceProvider = services.BuildServiceProvider();
 
-			stop.Stop();
-			Console.WriteLine($"elipse: {stop.ElapsedMilliseconds}");
+
+			var todoItem = new ToDo { SMS_PAN = $"lasha" };
+
+			var ptms = serviceProvider.GetRequiredService<IPTMSClient>();
+			var resp = await ptms.GetTemplate("v1", "2d00f1bf-d22c-409b-8466-95f5a812832f", todoItem);
+
+            Console.WriteLine(resp);
+
+
 			Console.ReadKey();
 
 		}
 
 	}
+
+	public class ToDo
+    {
+        public string SMS_PAN { get; set; }
+    }
 
 
 }

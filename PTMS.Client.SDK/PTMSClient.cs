@@ -40,7 +40,7 @@ namespace PTMS.Client.SDK
             var templateItem = new TemplateItem(templateId, name, description, category, template);
             string jsonData = JsonConvert.SerializeObject(templateItem);
             var response = await _http.PostAsync($"/api/templates/{templateId}", new StringContent(jsonData, Encoding.UTF8, "application/json"));
-            var result = await response.Content?.ReadAsStringAsync();
+            _ = await response.Content?.ReadAsStringAsync();
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new HttpRequestException();
         }
@@ -55,9 +55,9 @@ namespace PTMS.Client.SDK
             return JsonConvert.DeserializeObject<Categories>(result).Data;
         }
 
-        public async Task<string> GetTemplate(string templateId, string jsonData)
+        public async Task<string> GetTemplate(string version, string templateId, string jsonData)
         {
-            var response = await _http.PostAsync($"/api/templates/{templateId}/render/txt", new StringContent(jsonData, Encoding.UTF8, "application/json"));
+            var response = await _http.PostAsync($"/api/templates/{templateId}/render/txt/{version}", new StringContent(jsonData, Encoding.UTF8, "application/json"));
 
             var result = await response.Content?.ReadAsStringAsync();
             if (response.StatusCode != HttpStatusCode.OK)
@@ -66,10 +66,10 @@ namespace PTMS.Client.SDK
             return result;
         }
 
-        public async Task<string> GetTemplate<T>(string templateId, T obj)
+        public async Task<string> GetTemplate<T>(string version, string templateId, T obj)
         {
-            string jsonData = JsonConvert.SerializeObject(new TemplateBody<T>(obj));
-            var response = await _http.PostAsync($"/api/templates/{templateId}/render/txt", new StringContent(jsonData, Encoding.UTF8, "application/json"));
+            string jsonData = JsonConvert.SerializeObject(obj);
+            var response = await _http.PostAsync($"/api/templates/{templateId}/render/txt/{version}", new StringContent(jsonData, Encoding.UTF8, "application/json"));
             var result = await response.Content?.ReadAsStringAsync();
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new HttpRequestException();

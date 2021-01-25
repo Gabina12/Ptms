@@ -21,19 +21,14 @@ namespace PTMS.API.Extensions
     {
         public static IServiceCollection AddPtmsModulesWithMongo(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAuthentication("BasicAuthentication")
-                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
-
             services.Configure<StoreDatabaseSettings>(configuration.GetSection(nameof(StoreDatabaseSettings)));
             services.AddSingleton<IStoreDatabaseSettings>(sp => sp.GetRequiredService<IOptions<StoreDatabaseSettings>>().Value);
 
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<ITemplateRepository, TemplateRepository>();
             services.AddSingleton<IPartialsRepository, PartialsRepository>();
-            services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<ITemplateService, TemplateService>();
             services.AddSingleton<IPartialsService, PartialsService>();
-            services.AddScoped<IUserService, UserService>();
             services.AddSingleton<IRenderingService, RenderingService>();
             return services;
         }
@@ -48,10 +43,8 @@ namespace PTMS.API.Extensions
             services.AddScoped<ICategoryRepository, CategoryPostgreRepository>();
             services.AddScoped<ITemplateRepository, TemplatePostgreRepository>();
             services.AddScoped<IPartialsRepository, PartialsPostgreRepository>();
-            services.AddSingleton<IUserRepository, UserRepository>();
             services.AddScoped<ITemplateService, TemplateService>();
             services.AddScoped<IPartialsService, PartialsService>();
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRenderingService, RenderingService>();
 
             return services;

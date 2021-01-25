@@ -19,36 +19,13 @@ namespace PTMS.Client.SDK
         /// <param name="configuration"></param>
         /// <param name="sectionName"></param>
         /// <returns></returns>
-        public static IServiceCollection AddPtmsClient(this IServiceCollection services, IConfiguration configuration, string sectionName)
+        public static IServiceCollection AddPtmsClient(this IServiceCollection services, Action<HttpClient> options)
         {
-            var config = configuration.GetSection(sectionName).Get<PtmsConfiguration>();
-            services.AddHttpClient("ptms-client", options => {
-                var byteArray = Encoding.ASCII.GetBytes($"{config.UserName}:" +
-                                                        $"{config.Password}");
-                options.BaseAddress = new Uri(config.BaseUrl);
-                options.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-            }).AddPolicyHandler(GetRetryPolicy());
+            services.AddHttpClient("ptms-client", options).AddPolicyHandler(GetRetryPolicy());
             services.AddSingleton<IPTMSClient, PTMSClient>();
             return services;
         }
 
-        /// <summary>
-        /// Add Ptms client to use in dependency injection
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="configuration"></param>
-        /// <returns></returns>
-        public static IServiceCollection AddPtmsClient(this IServiceCollection services, PtmsConfiguration config)
-        {
-            services.AddHttpClient("ptms-client", options => {
-                var byteArray = Encoding.ASCII.GetBytes($"{config.UserName}:" +
-                                                        $"{config.Password}");
-                options.BaseAddress = new Uri(config.BaseUrl);
-                options.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-            }).AddPolicyHandler(GetRetryPolicy());
-            services.AddSingleton<IPTMSClient, PTMSClient>();
-            return services;
-        }
 
         private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
         {
