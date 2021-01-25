@@ -7,6 +7,7 @@ import 'buefy/dist/buefy.css';
 import '@mdi/font/css/materialdesignicons.min.css';
 import App from './App.vue';
 import router from './router';
+import Config from '@/config';
 import axios from 'axios';
 
 Vue.use(VueResource);
@@ -36,7 +37,18 @@ Vue.config.productionTip = false;
 //  }
 //);
 
-new Vue({
-  router,
-  render: h => h(App),
-}).$mount('#app');
+fetch(process.env.BASE_URL + "config.json")
+    .then((response) => {
+        response.json().then((config) => {
+            Config.api = config.BASE_URL;
+            new Vue({
+                router,
+                render: (h) => h(App)
+            }).$mount("#app")
+        })
+    });
+
+//new Vue({
+//  router,
+//  render: h => h(App),
+//}).$mount('#app');

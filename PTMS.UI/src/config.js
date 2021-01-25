@@ -1,3 +1,3 @@
 export default {
-  api: 'https://localhost:5001/api',
+  api: 'https://ptms.01.test.api.lb.ge/api',
 };
