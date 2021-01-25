@@ -14,7 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTMS.API", "PTMS.API\PTMS.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTMS.Infrastructure.Postgre", "PTMS.Infrastructure.Postgre\PTMS.Infrastructure.Postgre.csproj", "{7C975E6C-C8F3-4087-8ABF-248675521E92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTMS.Client.SDK", "PTMS.Client.SDK\PTMS.Client.SDK.csproj", "{6F2B63B5-3759-4A24-85AC-A996786C9917}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTMS.Client.SDK", "PTMS.Client.SDK\PTMS.Client.SDK.csproj", "{6F2B63B5-3759-4A24-85AC-A996786C9917}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "PTMS.UI", "PTMS.UI\PTMS.UI.njsproj", "{37D771CC-0AA7-4DB0-9446-3908CE40F48D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +48,10 @@ Global
 		{6F2B63B5-3759-4A24-85AC-A996786C9917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F2B63B5-3759-4A24-85AC-A996786C9917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F2B63B5-3759-4A24-85AC-A996786C9917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D771CC-0AA7-4DB0-9446-3908CE40F48D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D771CC-0AA7-4DB0-9446-3908CE40F48D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D771CC-0AA7-4DB0-9446-3908CE40F48D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D771CC-0AA7-4DB0-9446-3908CE40F48D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
