@@ -43,7 +43,8 @@ namespace PTMS.API
 				builder
 					.AllowAnyMethod()
 					.AllowAnyHeader()
-					.AllowAnyOrigin();
+					.WithOrigins(Configuration.GetValue<string[]>("Cors"))
+					.AllowCredentials();
 			}));
 
 
