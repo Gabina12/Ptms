@@ -43,9 +43,7 @@ namespace PTMS.API
 				builder
 					.AllowAnyMethod()
 					.AllowAnyHeader()
-					//.AllowAnyOrigin()
-					.WithOrigins("http://localhost:8080", "https://ptms.01.test.lb.ge")
-					.AllowCredentials();
+					.AllowAnyOrigin();
 			}));
 
 
