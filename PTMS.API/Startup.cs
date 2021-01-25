@@ -39,11 +39,12 @@ namespace PTMS.API
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			string[] cors = Configuration.GetSection("Cors").Get<string[]>();
 			services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder => {
 				builder
 					.AllowAnyMethod()
 					.AllowAnyHeader()
-					.WithOrigins(Configuration.GetValue<string[]>("Cors"))
+					.WithOrigins(cors)
 					.AllowCredentials();
 			}));
 
