@@ -9,7 +9,7 @@ using PTMS.Core.Models;
 using PTMS.Core.Repositories;
 
 namespace PTMS.API.Controllers {
-    [Authorize]
+    //[Authorize]
     [Route("api/categories")]
     [ApiController]
     public class CategoryController : ControllerBase {

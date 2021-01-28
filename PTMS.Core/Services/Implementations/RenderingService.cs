@@ -32,7 +32,7 @@ namespace PTMS.Core.Services.Implementations
 
 		public async Task<string> RenderAsync(string id, string type, string version, object json)
 		{
-			var template = await _cache.Get(_templateRepository,id.ToCacheKey(version));
+			var template = await _cache.Get(_templateRepository, id.ToCacheKey(version));
 			var partials = await _partials.GetList("partials");
 			return await _renderer.RenderAsync(template.TemplateBody, json, partials?.ToDictionary(x => x.Id, x => x.Template));
 		}

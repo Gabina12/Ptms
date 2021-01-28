@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PTMS.API.Controllers {
-	[Authorize]
+	//[Authorize]
     [Route("api/templates")]
 	public class RenderController : Controller
 	{
@@ -22,7 +22,7 @@ namespace PTMS.API.Controllers {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        [HttpPost("{id}/render/txt/{version?}")]
+        [HttpPost("{id}/render/txt/{version}")]
 		public async Task<IActionResult> Render(string id, string version, [FromBody]JObject templateIn)
 		{
 			_logger.LogInformation($"start rendering for id: {id}, version: {version} - {DateTime.Now}");
@@ -33,11 +33,11 @@ namespace PTMS.API.Controllers {
 		}
 
 
-		[HttpPost("{id}/render/pdf/{version?}")]
-		public async Task<IActionResult> RenderPdf(string id, string version, [FromBody] JsonElement templateIn) {
+		[HttpPost("{id}/render/pdf/{version}")]
+		public async Task<IActionResult> RenderPdf(string id, string version, [FromBody] JObject templateIn) {
 			object json = null;
-			if (templateIn.ValueKind != JsonValueKind.Undefined)
-				json = JsonConvert.DeserializeObject(templateIn.GetRawText());
+			if (templateIn != null)
+				json = JsonConvert.DeserializeObject(templateIn.ToString());
 			var file = await _render.RenderPdfAsync(id, "pdf", version, json);
 			return File(file, "application/pdf", $"{id}.pdf");
 		}

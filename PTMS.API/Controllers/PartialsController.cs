@@ -8,7 +8,7 @@ using PTMS.Core.Services.Interfaces;
 
 namespace PTMS.API.Controllers {
 
-	[Authorize]
+	//[Authorize]
 	[Route("api/partials")]
 	[ApiController]
 
